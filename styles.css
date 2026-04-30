@@ -49,6 +49,14 @@ nav a {
   width: 220px;
   display: inline-block;
 }
+
+.card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
 .card h3 {
   margin-bottom: 0.5rem;
 }
