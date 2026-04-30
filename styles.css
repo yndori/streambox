@@ -50,6 +50,13 @@ nav a {
   display: inline-block;
 }
 
+.card:hover {
+  background: #334155;
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
 .card img {
   width: 100%;
   height: auto;
