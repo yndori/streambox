@@ -9,11 +9,13 @@
   <body>
     <header>
       <h1>StreamBox</h1>
-          <nav>
-      <a href="#hero">Home</a></li>
-      <a href="#shows">Shows</a></li>
-      <a href="#about">About</a></li>
-    </nav>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#shows">Shows</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
       <section id="hero">
@@ -22,36 +24,60 @@
         <button class="btn-primary">Browse</button>
       </section>
       <section id="shows">
-        <article class="card">
-          <img src="https://image.tmdb.org/t/p/original/yXCbOiVDCxO71zI7cuwBRXdftq8.jpg" alt="The Hunger Games poster">
-          <h3>The Hunger Games</h3>
-          <p>Science Fiction</p>
-        </article>
-        <article class="card">
-          <img src="https://image.tmdb.org/t/p/original/j6G24dqI4WgUtChhWjfnI4lnmiK.jpg" alt="The End of Evangelion poster">
-          <h3>The End of Evangelion</h3>
-          <p>Action</p>
-        </article>
-        <article class="card">
-          <img src="https://image.tmdb.org/t/p/original/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="The Godfather poster">
-          <h3>The Godfather</h3>
-          <p>Drama</p>
-        </article>
-        <article class="card">
-          <img src="https://image.tmdb.org/t/p/original/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg" alt="Toy Story poster">
-          <h3>Toy Story</h3>
-          <p>Animated</p>
-        </article>
-        <article class="card">
-          <img src="https://image.tmdb.org/t/p/original/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg" alt="Star Wars poster">
-          <h3>Star Wars: Episode IV - A New Hope</h3>
-          <p>Science Fiction</p>
-        </article>
-        <article class="card">
-          <img src="https://image.tmdb.org/t/p/original/ceG9VzoRAVGwivFU403Wc3AHRys.jpg" alt="Indiana Jones and the  of the Lost Ark poster">
-          <h3>Indiana Jones and the Raiders of the Lost Ark</h3>
-          <p>Adventure</p>
-        </article>
+        <section class="category Drama">
+          <article class="card">
+            <img
+              src="https://image.tmdb.org/t/p/original/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+              alt="The Godfather poster"
+            />
+            <h3>The Godfather</h3>
+            <p>Drama</p>
+          </article>
+          <article class="card">
+            <img
+              src="https://image.tmdb.org/t/p/original/j6G24dqI4WgUtChhWjfnI4lnmiK.jpg"
+              alt="The End of Evangelion poster"
+            />
+            <h3>The End of Evangelion</h3>
+            <p>Drama</p>
+          </article>
+        </section>
+        <section class="category Comedy">
+          <article class="card">
+            <img
+              src="https://image.tmdb.org/t/p/original/yXCbOiVDCxO71zI7cuwBRXdftq8.jpg"
+              alt="The Hunger Games poster"
+            />
+            <h3>The Hunger Games</h3>
+            <p>Comedy</p>
+          </article>
+          <article class="card">
+            <img
+              src="https://image.tmdb.org/t/p/original/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg"
+              alt="Toy Story poster"
+            />
+            <h3>Toy Story</h3>
+            <p>Comedy</p>
+          </article>
+        </section>
+        <section class="category Thriller">
+          <article class="card">
+            <img
+              src="https://image.tmdb.org/t/p/original/ceG9VzoRAVGwivFU403Wc3AHRys.jpg"
+              alt="Indiana Jones and the  of the Lost Ark poster"
+            />
+            <h3>Indiana Jones and the Raiders of the Lost Ark</h3>
+            <p>Thriller</p>
+          </article>
+          <article class="card">
+            <img
+              src="https://image.tmdb.org/t/p/original/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg"
+              alt="Star Wars poster"
+            />
+            <h3>Star Wars: Episode IV - A New Hope</h3>
+            <p>Thriller</p>
+          </article>
+        </section>
       </section>
       <section id="about">
         <h2>What is StreamBox?</h2>
