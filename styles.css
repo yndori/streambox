@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+img, picture, video { 
+  max-width: 100%; 
+  height: auto; 
+}
+
 body {
   background: #0f172a;
   color: #f8fafc;
