@@ -92,6 +92,21 @@ nav a {
   }
 }
 
+@media (min-width: 40em) {
+  .hamburger {
+    display: none;
+  }
+
+  nav {
+    position: static;
+    width: auto;
+  }
+
+  nav ul {
+    display: flex;
+  }
+}
+
 #hero {
   padding: 4rem 2rem;
   background: #1e293b;
