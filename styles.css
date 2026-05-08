@@ -47,7 +47,7 @@ nav a {
   text-align: center;
 }
 #hero h2 {
-  font-size: 6em;
+  font-size: calc(1.5rem+4vw);
   margin-bottom: 1rem;
 }
 .btn-primary {
