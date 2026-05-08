@@ -4,9 +4,11 @@
   padding: 0;
 }
 
-img, picture, video { 
-  max-width: 100%; 
-  height: auto; 
+img,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
 }
 
 body {
@@ -45,7 +47,7 @@ nav a {
   text-align: center;
 }
 #hero h2 {
-  font-size: 6rem;
+  font-size: 6em;
   margin-bottom: 1rem;
 }
 .btn-primary {
@@ -85,9 +87,9 @@ nav a {
   margin-bottom: 0.5rem;
 }
 .card h3 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5em;
 }
 .card p {
   color: #94a3b8;
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }
