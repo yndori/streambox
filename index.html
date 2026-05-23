@@ -1,205 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>StreamBox</title>
-  </head>
-  <body>
-    <header>
-      <h1>StreamBox</h1>
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
-      <label for="nav-toggle" class="hamburger">☰</label>
-      <nav>
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#shows">Shows</a></li>
-          <li><a href="#about">About</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section id="hero">
-        <h2>Stream what you love</h2>
-        <p>Anytime, anywhere</p>
-        <button class="btn-primary">Browse</button>
-      </section>
-      <section id="shows">
-        <section class="category Drama">
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
-              alt="The Godfather poster"
-            />
-            <h3>The Godfather</h3>
-            <p>Drama</p>
-          </article>
-          <article class="card">
-            <img src="https://image.tmdb.org/t/p/original/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg" 
-            alt="Pulp Fiction poster">
-            <h3>Pulp Fiction</h3>
-            <p>Drama</p>
-          </article>
-          <article class="card">
-            <img src="https://image.tmdb.org/t/p/original/Cw4hIUIAmSYfK9QfaUW5igp9La.jpg" 
-            alt="Forest Gump poster">
-            <h3>Forest Gump</h3>
-            <p>Drama</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/j6G24dqI4WgUtChhWjfnI4lnmiK.jpg"
-              alt="The End of Evangelion poster"
-            />
-            <h3>The End of Evangelion</h3>
-            <p>Drama</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"
-              alt="The Shawshank Redemption poster"
-            />
-            <h3>The Shawshank Redemption</h3>
-            <p>Drama</p>
-          </article>
-        </section>
-        <section class="category Comedy">
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/7E8nLijS9AwwUEPu2oFYOVKhdFA.jpg"
-              alt="Ghostbusters poster"
-            />
-            <h3>Ghostbusters</h3>
-            <p>Comedy</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg"
-              alt="Toy Story poster"
-            />
-            <h3>Toy Story</h3>
-            <p>Comedy</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg"
-              alt="The Lion King poster"
-            />
-            <h3>The Lion King</h3>
-            <p>Comedy</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/8YZiA1o264dk0cr1USyMdph6SZl.jpg"
-              alt="Coming to America poster"
-            />
-            <h3>Coming to America</h3>
-            <p>Comedy</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/gCgt1WARPZaXnq523ySQEUKinCs.jpg"
-              alt="Groundhog Day poster"
-            />
-            <h3>Groundhog Day</h3>
-            <p>Comedy</p>
-          </article>
-        </section>
-        <section class="category Thriller">
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg"
-              alt="The Silence of the Lambs poster"
-            />
-            <h3>The Silence of the Lambs</h3>
-            <p>Thriller</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/191nKfP0ehp3uIvWqgPbFmI4lv9.jpg"
-              alt="SE7en poster"
-            />
-            <h3>SE7en</h3>
-            <p>Thriller</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg"
-              alt="Psycho poster"
-            />
-            <h3>Psycho</h3>
-            <p>Thriller</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/99X2SgyFunJFXGAYnDv3sb9pnUD.jpg"
-              alt="The Usual Suspects poster"
-            />
-            <h3>The Usual Suspects</h3>
-            <p>Thriller</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
-              alt="Parasite poster"
-            />
-            <h3>Parasite</h3>
-            <p>Thriller</p>
-          </article>
-        </section>
-        <section class="category Romance">
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
-              alt="Titanic poster"
-            />
-            <h3>Titanic</h3>
-            <p>Romance</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/lGCEKlJo2CnWydQj7aamY7s1S7Q.jpg"
-              alt="Casablanca poster"
-            />
-            <h3>Casablanca</h3>
-            <p>Romance</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/9Jw6jys7q9gjzVX5zm1z0gC8gY9.jpg"
-              alt="Dirty Dancing poster"
-            />
-            <h3>Dirty Dancing</h3>
-            <p>Romance</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/rNzQyW4f8B8cQeg7Dgj3n6eT5k9.jpg"
-              alt="The Notebook poster"
-            />
-            <h3>The Notebook</h3>
-            <p>Romance</p>
-          </article>
-          <article class="card">
-            <img
-              src="https://image.tmdb.org/t/p/original/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
-              alt="La La Land poster"
-            />
-            <h3>La La Land</h3>
-            <p>Romance</p>
-          </article>
-      </section>
-      <section id="about">
-        <h2>What is StreamBox?</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StreamBox</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="#" class="logo">StreamBox</a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation">
+      ☰
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#hero">Home</a>
+      <a href="#movies">Shows</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Watch anywhere</p>
+        <h1>Stream what you love</h1>
         <p>
-          StreamBox is a streaming service that allows you to watch your
-          favorite shows and movies online. We have a wide selection of shows
-          and movies to choose from, and our streaming platform is easy to use
-          and customizable.
+          Browse drama, comedy, thriller, sci-fi and more.
+          Discover your next favorite movie or show.
         </p>
-      </section>
-    </main>
-    <footer>© 2026 StreamBox</footer>
-  </body>
+        <a href="#movies" class="btn-primary">Browse</a>
+      </div>
+    </section>
+
+    <section id="movies" class="movies-section">
+      <div class="section-heading">
+        <h2>Browse movies</h2>
+        <p>Search, filter, and click a card to view details.</p>
+      </div>
+
+      <div class="toolbar">
+        <input
+          type="search"
+          id="search"
+          placeholder="Search movies..."
+          aria-label="Search movies"
+        />
+      </div>
+
+      <div class="grid" id="movieGrid"></div>
+
+      <p class="empty-message" id="emptyMessage">
+        No movies found.
+      </p>
+    </section>
+
+    <section id="about" class="about-section">
+      <h2>About StreamBox</h2>
+      <p>
+        StreamBox is a simple responsive movie browsing experience built with
+        HTML, CSS, and JavaScript.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 StreamBox</p>
+  </footer>
+
+  <dialog class="movie-modal" id="movieModal">
+    <button class="close-btn" id="closeModal" aria-label="Close modal">
+      ×
+    </button>
+
+    <div class="modal-poster" id="modalPoster"></div>
+
+    <div class="modal-content">
+      <p class="modal-genre" id="modalGenre"></p>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+
+      <div class="modal-meta">
+        <span id="modalYear"></span>
+        <span id="modalRating"></span>
+        <span id="modalWatched"></span>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
 </html>

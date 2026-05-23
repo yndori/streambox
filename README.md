@@ -1,13 +1,13 @@
 # StreamBox
 
-A responsive video streaming landing page built for INF 250.
+A simple responsive movie browsing web app built with HTML, CSS, and JavaScript.
 
-## What's here
+## Files
 
-- Hero landing page
-- Browse grid with categories
-- Show details page
+- `index.html` — page structure
+- `styles.css` — visual identity and responsive layout
+- `script.js` — movie array, search filter, card rendering, and modal behavior
 
-## Built with
+## How to run
 
-HTML5 · CSS3 · a sprinkle of JavaScript
+Open `index.html` in your browser.
