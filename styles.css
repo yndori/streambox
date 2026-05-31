@@ -469,3 +469,91 @@ a {
   background: #0f172a;
   color: white;
 }
+
+
+
+ 
+
+
+
+
+/* ========================= */
+/* 🔐 AUTH (CLEAN ORIGINAL STYLE) */
+/* ========================= */
+
+#authContainer {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 25px;
+
+  background: white;
+  border-radius: 10px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#authContainer h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+#authContainer h3 {
+  margin: 10px 0;
+  color: #0f172a;
+}
+
+#authContainer input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  font-size: 1rem;
+}
+
+#authContainer button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+
+  background: #f97316;
+  color: white;
+
+  border: none;
+  border-radius: 6px;
+
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#authContainer button:hover {
+  background: #ea580c;
+}
+
+#message {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+body {
+  margin: 0;
+  background: #0f172a;
+}
+
+/* prevent scrolling gap on auth screen */
+#authContainer {
+  min-height: 100vh;
+  overflow: hidden;
+}
+.auth-card {
+  padding: 2.5rem;
+}
+
+
