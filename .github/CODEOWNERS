@@ -1,0 +1,30 @@
+# CODEOWNERS file for streambox
+
+# This file defines who should review changes to different parts of the codebase
+
+# GitHub will request review from these people when a PR affects these paths
+
+# CSS files - CSS experts review styling changes
+
+\*.css @yndori
+
+# JavaScript files - JavaScript experts review logic changes
+
+\*.js @yndori
+
+# HTML files - Markup reviewers review structure changes
+
+\*.html @yndori
+
+# Configuration files - Everyone reviews
+
+.github/_ @yndori
+_.json @yndori
+_.yml @yndori
+_.yaml @yndori
+
+# Documentation - Project managers and tech leads review
+
+README.md @yndori
+CONTRIBUTING.md @yndori
+docs/\* @yndori
