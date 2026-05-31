@@ -212,3 +212,7 @@ navLinks.addEventListener("click", () => {
 renderCards(movies);
 
 console.log("StreamBox catalog loaded:", movies.length, "movies");
+renderCards(movies);
+filterMovies()
+openMovieModal()
+getPosterGradient()

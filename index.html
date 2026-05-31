@@ -21,8 +21,75 @@
       <a href="#about">About</a>
     </nav>
   </header>
+<!-- AUTHENTICATION AREA -->
+<section id="authContainer">
 
-  <main>
+  <h2>Welcome to StreamBox</h2>
+
+  <!-- SIGN UP -->
+  <div>
+    <h3>Create Account</h3>
+
+    <input
+      type="email"
+      id="signupEmail"
+      placeholder="Email"
+    >
+
+    <input
+      type="password"
+      id="signupPassword"
+      placeholder="Password"
+    >
+
+    <input
+      type="password"
+      id="confirmPassword"
+      placeholder="Confirm Password"
+    >
+
+    <button id="signupBtn">
+      Sign Up
+    </button>
+  </div>
+
+  <hr>
+
+  <!-- SIGN IN -->
+  <div>
+    <h3>Login</h3>
+
+    <input
+      type="email"
+      id="signinEmail"
+      placeholder="Email"
+    >
+
+    <input
+      type="password"
+      id="signinPassword"
+      placeholder="Password"
+    >
+
+    <button id="signinBtn">
+      Sign In
+    </button>
+  </div>
+
+  <p id="message"></p>
+
+</section>
+
+<!-- USER INFO -->
+<section id="userBar" style="display:none;">
+  Logged in as:
+  <span id="userEmail"></span>
+
+  <button id="logoutBtn">
+    Sign Out
+  </button>
+</section>
+  <main id="appContent" style="display:none;">
 
     <section id="hero" class="hero">
       <div class="hero-content">
@@ -91,7 +158,8 @@
       </div>
     </div>
   </dialog>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
