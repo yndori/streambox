@@ -30,8 +30,8 @@ async function loadPopularMovies() {
   setLoading(true, "Loading popular movies...");
 
   try {
-    const data = await fetchPopularMovies();
-    renderCards(data.results || data);
+    const movies = await fetchPopularMovies();
+    renderCards(movies);
   } catch (error) {
     console.error(error);
     showEmptyMessage("Could not load popular movies. Please check your API key.");
@@ -61,7 +61,7 @@ async function searchMovies(query) {
     const movies = await fetchMovieSearchResults(query);
 
     if (requestId === activeRequestId) {
-      renderCards(movies.results);
+      renderCards(movies);
     }
   } catch (error) {
     console.error(error);
