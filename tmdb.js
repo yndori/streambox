@@ -61,7 +61,7 @@ function formatReleaseDate(date) {
 }
 
 function formatRating(rating) {
-  if (!rating && rating !== 0) return "N/A";
+  if (rating === null || rating === undefined) return "N/A";
 
   return `${rating.toFixed(1)}/10`;
 }
