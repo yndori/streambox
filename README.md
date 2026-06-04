@@ -161,13 +161,15 @@ Obtain your TMDB API Key.
 
 ## Step 3: Configure the Application
 
-Insert your API key into the TMDB configuration section.
+Copy `config.example.js` to `config.js`, then add your TMDB API key.
 
-Example placeholder:
+Example:
 
 ```javascript
 const TMDB_API_KEY = "YOUR_TMDB_API_KEY";
 ```
+
+Do not commit `config.js`. It is ignored by Git because it contains a private key.
 
 ## Step 4: Test API Connectivity
 

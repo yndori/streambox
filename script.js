@@ -1,86 +1,3 @@
-const movies = [
-  {
-    id: 1,
-    title: "Inception",
-    year: 2010,
-    genre: "Sci-Fi",
-    rating: 8.8,
-    watched: true,
-    description:
-      "A skilled thief enters people's dreams to steal secrets, but his biggest mission is to plant an idea instead."
-  },
-  {
-    id: 2,
-    title: "The Matrix",
-    year: 1999,
-    genre: "Sci-Fi",
-    rating: 8.7,
-    watched: true,
-    description:
-      "A hacker discovers that his world is a simulation and joins a rebellion against the machines controlling humanity."
-  },
-  {
-    id: 3,
-    title: "Parasite",
-    year: 2019,
-    genre: "Drama",
-    rating: 8.6,
-    watched: false,
-    description:
-      "A poor family slowly infiltrates a wealthy household, leading to a dark and unexpected social thriller."
-  },
-  {
-    id: 4,
-    title: "Knives Out",
-    year: 2019,
-    genre: "Comedy",
-    rating: 7.9,
-    watched: true,
-    description:
-      "A detective investigates the mysterious death of a famous crime novelist surrounded by a suspicious family."
-  },
-  {
-    id: 5,
-    title: "Get Out",
-    year: 2017,
-    genre: "Thriller",
-    rating: 7.7,
-    watched: false,
-    description:
-      "A young man visits his girlfriend's family and uncovers a terrifying secret hiding behind polite smiles."
-  },
-  {
-    id: 6,
-    title: "La La Land",
-    year: 2016,
-    genre: "Drama",
-    rating: 8.0,
-    watched: true,
-    description:
-      "A jazz musician and an aspiring actress fall in love while chasing their dreams in Los Angeles."
-  },
-  {
-    id: 7,
-    title: "Spider-Man: Into the Spider-Verse",
-    year: 2018,
-    genre: "Animation",
-    rating: 8.4,
-    watched: true,
-    description:
-      "Miles Morales becomes Spider-Man and discovers a multiverse filled with other Spider-heroes."
-  },
-  {
-    id: 8,
-    title: "Interstellar",
-    year: 2014,
-    genre: "Sci-Fi",
-    rating: 8.7,
-    watched: false,
-    description:
-      "A team of explorers travels through a wormhole in search of a new home for humanity."
-  }
-];
-
 const movieGrid = document.getElementById("movieGrid");
 const searchInput = document.getElementById("search");
 const emptyMessage = document.getElementById("emptyMessage");
@@ -99,34 +16,94 @@ const modalWatched = document.getElementById("modalWatched");
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
-function renderCards(list) {
+let searchTimeout;
+let activeRequestId = 0;
+
+async function loadPopularMovies() {
+  if (!hasApiKey()) {
+    showEmptyMessage(
+      "Configure your TMDB API key in config.js to load popular movies."
+    );
+    return;
+  }
+
+  setLoading(true, "Loading popular movies...");
+
+  try {
+    const movies = await fetchPopularMovies();
+    renderCards(movies);
+  } catch (error) {
+    console.error(error);
+    showEmptyMessage("Could not load popular movies. Please check your API key.");
+  } finally {
+    setLoading(false);
+  }
+}
+
+async function searchMovies(query) {
+  const requestId = ++activeRequestId;
+
+  if (!hasApiKey()) {
+    showEmptyMessage(
+      "Configure your TMDB API key in config.js to search movies."
+    );
+    return;
+  }
+
+  if (!query) {
+    await loadPopularMovies();
+    return;
+  }
+
+  setLoading(true, `Searching for "${query}"...`);
+
+  try {
+    const movies = await fetchMovieSearchResults(query);
+
+    if (requestId === activeRequestId) {
+      renderCards(movies);
+    }
+  } catch (error) {
+    console.error(error);
+    showEmptyMessage("Search failed. Please try again.");
+  } finally {
+    if (requestId === activeRequestId) {
+      setLoading(false);
+    }
+  }
+}
+
+function renderCards(movies) {
   movieGrid.innerHTML = "";
 
-  if (list.length === 0) {
-    emptyMessage.style.display = "block";
+  if (movies.length === 0) {
+    showEmptyMessage("No movies found.");
     return;
   }
 
   emptyMessage.style.display = "none";
 
-  list.forEach((movie) => {
+  movies.forEach((movie) => {
     const card = document.createElement("article");
     card.className = "card";
     card.dataset.movieId = movie.id;
+    const safeTitle = escapeHtml(movie.title || "Untitled movie");
+
+    const posterMarkup = movie.poster_path
+      ? `<img src="${getPosterUrl(movie.poster_path)}" alt="${safeTitle} poster" loading="lazy" />`
+      : `<span>${POSTER_FALLBACK_TEXT}</span>`;
 
     card.innerHTML = `
       <div class="card-poster">
-        <span>${movie.genre}</span>
+        ${posterMarkup}
       </div>
 
-      <h3>${movie.title}</h3>
-      <p>${movie.year} · ${movie.genre}</p>
+      <h3>${safeTitle}</h3>
+      <p>${formatReleaseDate(movie.release_date)}</p>
 
       <div class="card-meta">
-        <span class="rating">★ ${movie.rating}</span>
-        <span class="${movie.watched ? "watched" : "not-watched"}">
-          ${movie.watched ? "Watched" : "Not watched"}
-        </span>
+        <span class="rating">Rating: ${formatRating(movie.vote_average)}</span>
+        <span>${movie.vote_count || 0} votes</span>
       </div>
     `;
 
@@ -138,50 +115,78 @@ function renderCards(list) {
   });
 }
 
-function filterMovies() {
-  const searchTerm = searchInput.value.toLowerCase().trim();
+async function openMovieModal(movieId) {
+  if (!hasApiKey()) return;
 
-  const filteredMovies = movies.filter((movie) => {
-    return (
-      movie.title.toLowerCase().includes(searchTerm) ||
-      movie.genre.toLowerCase().includes(searchTerm) ||
-      String(movie.year).includes(searchTerm)
-    );
-  });
-
-  renderCards(filteredMovies);
-}
-
-function openMovieModal(movieId) {
-  const movie = movies.find((item) => item.id === movieId);
-
-  if (!movie) return;
-
-  modalGenre.textContent = movie.genre;
-  modalTitle.textContent = movie.title;
-  modalDescription.textContent = movie.description;
-  modalYear.textContent = `Year: ${movie.year}`;
-  modalRating.textContent = `Rating: ${movie.rating}`;
-  modalWatched.textContent = movie.watched ? "Watched" : "Not watched";
-
-  modalPoster.style.background = getPosterGradient(movie.genre);
+  modalGenre.textContent = "Loading";
+  modalTitle.textContent = "Fetching movie details...";
+  modalDescription.textContent = "";
+  modalYear.textContent = "";
+  modalRating.textContent = "";
+  modalWatched.textContent = "";
+  modalPoster.innerHTML = "";
+  modalPoster.classList.add("poster-loading");
 
   movieModal.showModal();
+
+  try {
+    const movie = await fetchMovieDetails(movieId);
+    const genres = movie.genres.map((genre) => genre.name).join(", ");
+
+    modalGenre.textContent = genres || "Movie";
+    modalTitle.textContent = movie.title;
+    modalDescription.textContent = movie.overview || "No overview available.";
+    modalYear.textContent = `Release: ${formatReleaseDate(movie.release_date)}`;
+    modalRating.textContent = `Rating: ${formatRating(movie.vote_average)}`;
+    modalWatched.textContent = `${movie.runtime || "N/A"} min`;
+
+    modalPoster.classList.remove("poster-loading");
+    modalPoster.innerHTML = movie.poster_path
+      ? `<img src="${getPosterUrl(movie.poster_path)}" alt="${escapeHtml(movie.title)} poster" />`
+      : `<span>${POSTER_FALLBACK_TEXT}</span>`;
+  } catch (error) {
+    console.error(error);
+    modalGenre.textContent = "Error";
+    modalTitle.textContent = "Movie details unavailable";
+    modalDescription.textContent = "Please try again later.";
+    modalPoster.classList.remove("poster-loading");
+  }
 }
 
-function getPosterGradient(genre) {
-  const gradients = {
-    "Sci-Fi": "linear-gradient(135deg, #f97316, #14b8a6)",
-    Drama: "linear-gradient(135deg, #f97316, #334155)",
-    Comedy: "linear-gradient(135deg, #f97316, #facc15)",
-    Thriller: "linear-gradient(135deg, #0f172a, #f97316)",
-    Animation: "linear-gradient(135deg, #14b8a6, #f97316)"
-  };
-
-  return gradients[genre] || "linear-gradient(135deg, #f97316, #14b8a6)";
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
-searchInput.addEventListener("input", filterMovies);
+function showEmptyMessage(message) {
+  movieGrid.innerHTML = "";
+  emptyMessage.textContent = message;
+  emptyMessage.style.display = "block";
+}
+
+function setLoading(isLoading, message = "") {
+  searchInput.disabled = isLoading && !hasApiKey();
+
+  if (isLoading) {
+    emptyMessage.textContent = message;
+    emptyMessage.style.display = "block";
+  }
+}
+
+function handleSearchInput() {
+  const searchTerm = searchInput.value.trim();
+
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    searchMovies(searchTerm);
+  }, 400);
+}
+
+searchInput.addEventListener("input", handleSearchInput);
 
 closeModal.addEventListener("click", () => {
   movieModal.close();
@@ -209,6 +214,4 @@ navLinks.addEventListener("click", () => {
   navLinks.classList.remove("show");
 });
 
-renderCards(movies);
-
-console.log("StreamBox catalog loaded:", movies.length, "movies");
+loadPopularMovies();
