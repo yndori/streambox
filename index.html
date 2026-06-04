@@ -12,6 +12,9 @@
   <meta name="description" content="StreamBox - Stream your favorite movies and shows" />
   <title>StreamBox</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="config.js" defer></script>
+  <script src="tmdb.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -19,12 +22,12 @@
     <a href="#" class="logo">StreamBox</a>
 
     <button class="menu-btn" id="menuBtn" aria-label="Open navigation">
-      ☰
+      &equiv;
     </button>
 
     <nav class="nav-links" id="navLinks">
       <a href="#hero">Home</a>
-      <a href="#movies">Shows</a>
+      <a href="#movies">Movies</a>
       <a href="#about">About</a>
     </nav>
   </header>
@@ -175,7 +178,7 @@
       <div class="grid" id="movieGrid"></div>
 
       <p class="empty-message" id="emptyMessage">
-        No movies found.
+        Loading movies...
       </p>
     </section>
 
@@ -190,12 +193,12 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 StreamBox</p>
+    <p>&copy; 2026 StreamBox</p>
   </footer>
 
   <dialog class="movie-modal" id="movieModal">
     <button class="close-btn" id="closeModal" aria-label="Close modal">
-      ×
+      &times;
     </button>
 
     <div class="modal-poster" id="modalPoster"></div>
@@ -212,6 +215,9 @@
       </div>
     </div>
   </dialog>
+<<<<<<< HEAD
   
+=======
+>>>>>>> main
 </body>
 </html>
