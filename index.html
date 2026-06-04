@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StreamBox</title>
-  <link rel="stylesheet" href="styles.css" />
   <script src="config.js" defer></script>
   <script src="tmdb.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="auth.js" defer></script>
   <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="StreamBox - Stream your favorite movies and shows" />
+  <title>StreamBox</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -24,8 +28,122 @@
       <a href="#about">About</a>
     </nav>
   </header>
+<!-- AUTHENTICATION UI-->
+<section id="authContainer" class="auth-wrapper">
+  <h2>StreamBox</h2>
+  
+  <!-- MESSAGE DISPLAY -->
+  <div id="message" class="auth-message" role="alert" aria-live="polite"></div>
 
-  <main>
+  <div class="auth-cards-container">
+    <!-- SIGN IN CARD -->
+    <div class="auth-card">
+      <h3>Sign In</h3>
+      
+      <form id="signinForm" onsubmit="return false;">
+        <div class="form-group">
+          <label for="signinEmail">Email Address</label>
+          <input 
+            type="email" 
+            id="signinEmail" 
+            placeholder="your@email.com"
+            list="emailSuggestions"
+            autocomplete="email"
+            required
+            aria-label="Sign in email address"
+          >
+          <datalist id="emailSuggestions"></datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="signinPassword">Password</label>
+          <input 
+            type="password" 
+            id="signinPassword" 
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+            aria-label="Sign in password"
+          >
+          <label class="toggle-label">
+            <input type="checkbox" class="password-visibility-toggle" data-target="signinPassword">
+            <span id="signinPasswordToggleText">Show password</span>
+          </label>
+        </div>
+
+        <button type="button" id="signinBtn" class="btn-signin">Sign In</button>
+      </form>
+    </div>
+
+    <!-- SIGN UP CARD -->
+    <div class="auth-card">
+      <h3>Create Account</h3>
+      
+      <form id="signupForm" onsubmit="return false;">
+        <div class="form-group">
+          <label for="signupEmail">Email Address</label>
+          <input 
+            type="email" 
+            id="signupEmail" 
+            autocomplete="email"
+            list="emailSuggestions"
+            placeholder="your@email.com"
+            required
+            aria-label="Sign up email address"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input 
+            type="password" 
+            id="signupPassword" 
+            autocomplete="new-password"
+            placeholder="Min. 6 characters"
+            required
+            aria-label="Sign up password"
+          >
+          <small class="password-hint">Minimum 6 characters</small>
+          <label class="toggle-label">
+            <input type="checkbox" class="password-visibility-toggle" data-target="signupPassword">
+           <span id="signupPasswordToggleText">Show password</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            autocomplete="new-password"
+            placeholder="Confirm your password"
+            required
+            aria-label="Confirm password"
+          >
+          <label class="toggle-label">
+            <input type="checkbox" class="password-visibility-toggle" data-target="confirmPassword">
+            <span id="confirmPasswordToggleText">Show password</span>
+          </label>
+        </div>
+
+        <button type="button" id="signupBtn" class="btn-signup">Create Account</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- USER INFO BAR -->
+<section id="userBar" class="user-bar" style="display:none;">
+  <div class="user-info">
+    <span class="user-label">Logged in as:</span>
+    <span id="userEmail" class="user-email" aria-label="Current user email"></span>
+  </div>
+
+  <button id="logoutBtn" class="btn-logout" aria-label="Sign out">
+    Sign Out
+  </button>
+</section>
+  <main id="appContent" style="display:none;">
 
     <section id="hero" class="hero">
       <div class="hero-content">
@@ -94,5 +212,6 @@
       </div>
     </div>
   </dialog>
+  
 </body>
 </html>
