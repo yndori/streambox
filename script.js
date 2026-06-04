@@ -214,7 +214,6 @@ navLinks.addEventListener("click", () => {
   navLinks.classList.remove("show");
 });
 
-<<<<<<< HEAD
 renderCards(movies);
 
 console.log("StreamBox catalog loaded:", movies.length, "movies");
@@ -222,6 +221,3 @@ renderCards(movies);
 filterMovies()
 openMovieModal()
 getPosterGradient()
-=======
-loadPopularMovies();
->>>>>>> main
