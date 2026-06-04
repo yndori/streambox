@@ -30,8 +30,8 @@ async function loadPopularMovies() {
   setLoading(true, "Loading popular movies...");
 
   try {
-    const movies = await fetchPopularMovies();
-    renderCards(movies);
+    const data = await fetchPopularMovies();
+    renderCards(data.results || data);
   } catch (error) {
     console.error(error);
     showEmptyMessage("Could not load popular movies. Please check your API key.");
@@ -61,7 +61,7 @@ async function searchMovies(query) {
     const movies = await fetchMovieSearchResults(query);
 
     if (requestId === activeRequestId) {
-      renderCards(movies);
+      renderCards(movies.results);
     }
   } catch (error) {
     console.error(error);
@@ -214,10 +214,4 @@ navLinks.addEventListener("click", () => {
   navLinks.classList.remove("show");
 });
 
-renderCards(movies);
-
-console.log("StreamBox catalog loaded:", movies.length, "movies");
-renderCards(movies);
-filterMovies()
-openMovieModal()
-getPosterGradient()
+loadPopularMovies();
