@@ -146,13 +146,15 @@ function setAuthUI(user) {
   }
 }
 
-function clearAuthForms() {
+function clearAuthForms(clearMessage = true) {
   signupEmail.value = "";
   signupPassword.value = "";
   confirmPassword.value = "";
   signinEmail.value = "";
   signinPassword.value = "";
-  message.textContent = "";
+  // By default, clear the visible message; callers can opt out
+  // (e.g. preserve the "check your email" notice after sign-up)
+  if (clearMessage && message) message.textContent = "";
 }
 
 // =============================
@@ -202,7 +204,8 @@ function setupSignUpListener() {
 
       showMessage("Sign-up successful! Check your email to confirm your account.", "green");
       saveEmail(email.trim());
-      clearAuthForms();
+      // Keep the message visible so user can read the verification instruction
+      clearAuthForms(false);
     } catch (err) {
       showMessage("An unexpected error occurred. Please try again.");
       console.error("Sign-up error:", err);
