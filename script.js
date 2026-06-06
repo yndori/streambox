@@ -1,6 +1,11 @@
 const movieGrid = document.getElementById("movieGrid");
 const searchInput = document.getElementById("search");
+const genreFilter = document.getElementById("genreFilter");
 const emptyMessage = document.getElementById("emptyMessage");
+const pagination = document.getElementById("pagination");
+const prevPage = document.getElementById("prevPage");
+const nextPage = document.getElementById("nextPage");
+const pageNumber = document.getElementById("pageNumber");
 
 const movieModal = document.getElementById("movieModal");
 const closeModal = document.getElementById("closeModal");
@@ -18,8 +23,12 @@ const navLinks = document.getElementById("navLinks");
 
 let searchTimeout;
 let activeRequestId = 0;
+let currentPage = 1;
+let totalPages = 1;
+let currentSearchTerm = "";
+let currentGenreId = "";
 
-async function loadPopularMovies() {
+async function initializeMovies() {
   if (!hasApiKey()) {
     showEmptyMessage(
       "Configure your TMDB API key in config.js to load popular movies."
@@ -27,50 +36,61 @@ async function loadPopularMovies() {
     return;
   }
 
-  setLoading(true, "Loading popular movies...");
+  await loadGenres();
+  await loadMovies();
+}
 
+async function loadGenres() {
   try {
-    const movies = await fetchPopularMovies();
-    renderCards(movies);
+    const genres = await fetchMovieGenres();
+    renderGenreOptions(genres);
   } catch (error) {
     console.error(error);
-    showEmptyMessage("Could not load popular movies. Please check your API key.");
-  } finally {
-    setLoading(false);
   }
 }
 
-async function searchMovies(query) {
-  const requestId = ++activeRequestId;
-
+async function loadMovies() {
   if (!hasApiKey()) {
     showEmptyMessage(
-      "Configure your TMDB API key in config.js to search movies."
+      "Configure your TMDB API key in config.js to load movies."
     );
     return;
   }
 
-  if (!query) {
-    await loadPopularMovies();
-    return;
-  }
+  const requestId = ++activeRequestId;
+  const loadingLabel = getLoadingMessage();
 
-  setLoading(true, `Searching for "${query}"...`);
+  setLoading(true, loadingLabel);
 
   try {
-    const movies = await fetchMovieSearchResults(query);
+    const data = await fetchCurrentMovieData();
 
     if (requestId === activeRequestId) {
-      renderCards(movies);
+      totalPages = Math.min(data.total_pages || 1, 500);
+      renderCards(data.results || []);
+      updatePagination();
     }
   } catch (error) {
     console.error(error);
-    showEmptyMessage("Search failed. Please try again.");
+    showEmptyMessage("Could not load movies. Please check your API key.");
+    updatePagination();
   } finally {
     if (requestId === activeRequestId) {
       setLoading(false);
     }
   }
+}
+
+async function fetchCurrentMovieData() {
+  if (currentSearchTerm) {
+    return fetchMovieSearchResults(currentSearchTerm, currentPage);
+  }
+
+  if (currentGenreId) {
+    return fetchMoviesByGenre(currentGenreId, currentPage);
+  }
+
+  return fetchPopularMovies(currentPage);
 }
 
 function renderCards(movies) {
@@ -112,6 +132,15 @@ function renderCards(movies) {
     });
 
     movieGrid.appendChild(card);
+  });
+}
+
+function renderGenreOptions(genres) {
+  genres.forEach((genre) => {
+    const option = document.createElement("option");
+    option.value = genre.id;
+    option.textContent = genre.name;
+    genreFilter.appendChild(option);
   });
 }
 
@@ -166,6 +195,7 @@ function showEmptyMessage(message) {
   movieGrid.innerHTML = "";
   emptyMessage.textContent = message;
   emptyMessage.style.display = "block";
+  pagination.style.display = "none";
 }
 
 function setLoading(isLoading, message = "") {
@@ -178,15 +208,65 @@ function setLoading(isLoading, message = "") {
 }
 
 function handleSearchInput() {
-  const searchTerm = searchInput.value.trim();
-
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(() => {
-    searchMovies(searchTerm);
+    currentSearchTerm = searchInput.value.trim();
+    currentPage = 1;
+
+    if (currentSearchTerm) {
+      currentGenreId = "";
+      genreFilter.value = "";
+    }
+
+    loadMovies();
   }, 400);
 }
 
+function handleGenreChange() {
+  currentGenreId = genreFilter.value;
+  currentPage = 1;
+
+  if (currentGenreId) {
+    currentSearchTerm = "";
+    searchInput.value = "";
+  }
+
+  loadMovies();
+}
+
+function goToPreviousPage() {
+  if (currentPage <= 1) return;
+
+  currentPage -= 1;
+  loadMovies();
+}
+
+function goToNextPage() {
+  if (currentPage >= totalPages) return;
+
+  currentPage += 1;
+  loadMovies();
+}
+
+function updatePagination() {
+  const hasPages = totalPages > 1 && movieGrid.children.length > 0;
+
+  pagination.style.display = hasPages ? "flex" : "none";
+  pageNumber.textContent = `Page ${currentPage} of ${totalPages}`;
+  prevPage.disabled = currentPage <= 1;
+  nextPage.disabled = currentPage >= totalPages;
+}
+
+function getLoadingMessage() {
+  if (currentSearchTerm) return `Searching for "${currentSearchTerm}"...`;
+  if (currentGenreId) return "Loading genre movies...";
+  return "Loading popular movies...";
+}
+
 searchInput.addEventListener("input", handleSearchInput);
+genreFilter.addEventListener("change", handleGenreChange);
+prevPage.addEventListener("click", goToPreviousPage);
+nextPage.addEventListener("click", goToNextPage);
 
 closeModal.addEventListener("click", () => {
   movieModal.close();
@@ -214,4 +294,4 @@ navLinks.addEventListener("click", () => {
   navLinks.classList.remove("show");
 });
 
-loadPopularMovies();
+initializeMovies();

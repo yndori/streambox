@@ -170,6 +170,10 @@
           placeholder="Search movies..."
           aria-label="Search movies"
         />
+
+        <select id="genreFilter" aria-label="Filter movies by genre">
+          <option value="">All genres</option>
+        </select>
       </div>
 
       <div class="grid" id="movieGrid"></div>
@@ -177,6 +181,12 @@
       <p class="empty-message" id="emptyMessage">
         Loading movies...
       </p>
+
+      <div class="pagination" id="pagination">
+        <button type="button" id="prevPage">Previous</button>
+        <span id="pageNumber">Page 1</span>
+        <button type="button" id="nextPage">Next</button>
+      </div>
     </section>
 
     <section id="about" class="about-section">
