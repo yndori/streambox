@@ -160,12 +160,11 @@ function clearAuthForms(clearMessage = true) {
 // =============================
 // 📩 MESSAGE
 // =============================
-function showMessage(text, color = "red") {
+function showMessage(text, color = "red", persist = false) {
   message.textContent = text;
   message.style.color = color;
-  
-  // Auto-clear success messages after 5 seconds
-  if (color === "green") {
+
+  if (color === "green" && !persist) {
     setTimeout(() => {
       message.textContent = "";
     }, 5000);
@@ -202,7 +201,11 @@ function setupSignUpListener() {
         return;
       }
 
-      showMessage("Sign-up successful! Check your email to confirm your account.", "green");
+      showMessage(
+  "Sign-up successful! Please check your email to confirm your account.",
+  "green",
+  true
+);
       saveEmail(email.trim());
       // Keep the message visible so user can read the verification instruction
       clearAuthForms(false);
