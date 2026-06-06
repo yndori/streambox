@@ -27,19 +27,30 @@ async function fetchFromTmdb(endpoint, params = {}) {
   return response.json();
 }
 
-async function fetchPopularMovies() {
-  const data = await fetchFromTmdb("/movie/popular", { page: "1" });
-  return data.results || [];
+async function fetchPopularMovies(page = 1) {
+  return fetchFromTmdb("/movie/popular", { page: String(page) });
 }
 
-async function fetchMovieSearchResults(query) {
-  const data = await fetchFromTmdb("/search/movie", {
+async function fetchMovieSearchResults(query, page = 1) {
+  return fetchFromTmdb("/search/movie", {
     query,
     include_adult: "false",
-    page: "1"
+    page: String(page)
   });
+}
 
-  return data.results || [];
+async function fetchMovieGenres() {
+  const data = await fetchFromTmdb("/genre/movie/list");
+  return data.genres || [];
+}
+
+async function fetchMoviesByGenre(genreId, page = 1) {
+  return fetchFromTmdb("/discover/movie", {
+    with_genres: genreId,
+    sort_by: "popularity.desc",
+    include_adult: "false",
+    page: String(page)
+  });
 }
 
 async function fetchMovieDetails(movieId) {

@@ -166,19 +166,31 @@ a {
   padding: 1rem;
   margin-bottom: 2rem;
   display: flex;
+  gap: 1rem;
   justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.toolbar input {
+.toolbar input,
+.toolbar select {
   width: min(100%, 480px);
   padding: 0.9rem 1rem;
   font-size: 1rem;
   border: 2px solid var(--border);
   border-radius: 4px;
   outline: none;
+  background: white;
+  color: var(--background);
 }
 
-.toolbar input:focus {
+.toolbar select {
+  width: min(100%, 240px);
+  cursor: pointer;
+}
+
+.toolbar input:focus,
+.toolbar select:focus {
   border-color: var(--brand);
 }
 
@@ -269,6 +281,60 @@ a {
   color: #64748b;
   margin-top: 2rem;
   font-size: 1.1rem;
+}
+
+.pagination {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.pagination button {
+  background: var(--background);
+  color: var(--text);
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.page-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pagination .page-number {
+  min-width: 42px;
+  padding: 0.75rem 0.85rem;
+}
+
+.pagination .page-number.active {
+  background: var(--brand);
+  color: white;
+}
+
+.page-ellipsis {
+  color: var(--background);
+  font-weight: 700;
+  padding: 0 0.2rem;
+}
+
+.pagination button:disabled {
+  background: #cbd5e1;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: var(--background);
+  font-weight: 700;
 }
 
 .about-section {
@@ -421,6 +487,11 @@ a {
 
   .toolbar {
     justify-content: stretch;
+  }
+
+  .toolbar input,
+  .toolbar select {
+    width: 100%;
   }
 
   .hero {
