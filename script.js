@@ -6,6 +6,7 @@ const pagination = document.getElementById("pagination");
 const prevPage = document.getElementById("prevPage");
 const nextPage = document.getElementById("nextPage");
 const pageNumber = document.getElementById("pageNumber");
+const pageButtons = document.getElementById("pageButtons");
 
 const movieModal = document.getElementById("movieModal");
 const closeModal = document.getElementById("closeModal");
@@ -248,6 +249,13 @@ function goToNextPage() {
   loadMovies();
 }
 
+function goToPage(page) {
+  if (page === currentPage || page < 1 || page > totalPages) return;
+
+  currentPage = page;
+  loadMovies();
+}
+
 function updatePagination() {
   const hasPages = totalPages > 1 && movieGrid.children.length > 0;
 
@@ -255,6 +263,74 @@ function updatePagination() {
   pageNumber.textContent = `Page ${currentPage} of ${totalPages}`;
   prevPage.disabled = currentPage <= 1;
   nextPage.disabled = currentPage >= totalPages;
+  renderPageButtons();
+}
+
+function renderPageButtons() {
+  pageButtons.innerHTML = "";
+
+  const pages = getVisiblePageNumbers();
+
+  pages.forEach((page) => {
+    if (page === "...") {
+      const separator = document.createElement("span");
+      separator.className = "page-ellipsis";
+      separator.textContent = "...";
+      pageButtons.appendChild(separator);
+      return;
+    }
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "page-number";
+    button.textContent = page;
+    button.setAttribute("aria-label", `Go to page ${page}`);
+
+    if (page === currentPage) {
+      button.classList.add("active");
+      button.setAttribute("aria-current", "page");
+    }
+
+    button.addEventListener("click", () => {
+      goToPage(page);
+    });
+
+    pageButtons.appendChild(button);
+  });
+}
+
+function getVisiblePageNumbers() {
+  const pages = [];
+  const maxButtons = 5;
+
+  if (totalPages <= maxButtons) {
+    for (let page = 1; page <= totalPages; page += 1) {
+      pages.push(page);
+    }
+
+    return pages;
+  }
+
+  pages.push(1);
+
+  const startPage = Math.max(2, currentPage - 1);
+  const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+  if (startPage > 2) {
+    pages.push("...");
+  }
+
+  for (let page = startPage; page <= endPage; page += 1) {
+    pages.push(page);
+  }
+
+  if (endPage < totalPages - 1) {
+    pages.push("...");
+  }
+
+  pages.push(totalPages);
+
+  return pages;
 }
 
 function getLoadingMessage() {

@@ -288,6 +288,7 @@ a {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
   margin-top: 2rem;
 }
 
@@ -299,6 +300,30 @@ a {
   padding: 0.75rem 1rem;
   font-weight: 700;
   cursor: pointer;
+}
+
+.page-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pagination .page-number {
+  min-width: 42px;
+  padding: 0.75rem 0.85rem;
+}
+
+.pagination .page-number.active {
+  background: var(--brand);
+  color: white;
+}
+
+.page-ellipsis {
+  color: var(--background);
+  font-weight: 700;
+  padding: 0 0.2rem;
 }
 
 .pagination button:disabled {
