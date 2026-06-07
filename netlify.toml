@@ -1,0 +1,3 @@
+[build]
+  publish = "."
+  command = "echo \"const SUPABASE_URL = 'https://leayxuugyjxxhkevngxd.supabase.co'; const SUPABASE_ANON_KEY = 'sb_publishable_uS5OzRm2KdR2nFeD8XqGLw_-kyb4yO4';\" > config.js"

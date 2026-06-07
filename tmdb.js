@@ -6,17 +6,32 @@ const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 const POSTER_FALLBACK_TEXT = "No poster available";
 
 function hasApiKey() {
-  return Boolean(activeTmdbApiKey);
+  const isLocal =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1" ||
+    window.location.protocol === "file:";
+  return Boolean(activeTmdbApiKey) || !isLocal;
 }
 
 async function fetchFromTmdb(endpoint, params = {}) {
-  const url = new URL(`${TMDB_BASE_URL}${endpoint}`);
+  let url;
 
-  url.search = new URLSearchParams({
-    api_key: activeTmdbApiKey,
-    language: "en-US",
-    ...params
-  }).toString();
+  if (activeTmdbApiKey) {
+    // Local development: Call TMDB directly using the local API key
+    url = new URL(`${TMDB_BASE_URL}${endpoint}`);
+    url.search = new URLSearchParams({
+      api_key: activeTmdbApiKey,
+      language: "en-US",
+      ...params
+    }).toString();
+  } else {
+    // Production deployment: Call the Netlify serverless function proxy
+    url = new URL("/.netlify/functions/tmdb", window.location.origin);
+    url.search = new URLSearchParams({
+      endpoint,
+      ...params
+    }).toString();
+  }
 
   const response = await fetch(url);
 

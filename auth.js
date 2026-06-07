@@ -12,7 +12,7 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
 // =============================
 // 🎯 ELEMENTS (Declared globally)
 // =============================
-let authContainer, appContent, userBar, userEmail, message;
+let authContainer, appContent, userBar, userEmail;
 let signupEmail, signupPassword, confirmPassword, signinEmail, signinPassword;
 let signupBtn, signinBtn, logoutBtn;
 let showSigninBtn, showSignupBtn;
@@ -57,7 +57,6 @@ function initializeElements() {
   appContent = document.getElementById("appContent");
   userBar = document.getElementById("userBar");
   userEmail = document.getElementById("userEmail");
-  message = document.getElementById("message");
 
   // Form inputs
   signupEmail = document.getElementById("signupEmail");
@@ -179,21 +178,30 @@ function clearAuthForms(clearMessage = true) {
   confirmPassword.value = "";
   signinEmail.value = "";
   signinPassword.value = "";
-  // By default, clear the visible message; callers can opt out
-  // (e.g. preserve the "check your email" notice after sign-up)
-  if (clearMessage && message) message.textContent = "";
+
+  if (clearMessage) {
+    const signinMsg = document.getElementById("signinMessage");
+    const signupMsg = document.getElementById("signupMessage");
+    if (signinMsg) signinMsg.textContent = "";
+    if (signupMsg) signupMsg.textContent = "";
+  }
 }
 
 // =============================
 // 📩 MESSAGE
 // =============================
 function showMessage(text, color = "red", persist = false) {
-  message.textContent = text;
-  message.style.color = color;
+  const isSigninActive = document.getElementById("signinCard").classList.contains("active");
+  const msgEl = document.getElementById(isSigninActive ? "signinMessage" : "signupMessage");
+
+  if (!msgEl) return;
+
+  msgEl.textContent = text;
+  msgEl.style.color = color;
 
   if (color === "green" && !persist) {
     setTimeout(() => {
-      message.textContent = "";
+      msgEl.textContent = "";
     }, 5000);
   }
 }
@@ -228,14 +236,21 @@ function setupSignUpListener() {
         return;
       }
 
-      showMessage(
-        "Sign-up successful! Please check your email to confirm your account.",
-        "green",
-        true,
-      );
       saveEmail(email.trim());
-      // Keep the message visible so user can read the verification instruction
-      clearAuthForms(false);
+
+      if (data && data.session) {
+        // If email confirmation is disabled in Supabase, sign in automatically
+        showMessage("Account created and signed in successfully!", "green");
+        setAuthUI(data.user);
+      } else {
+        // If email confirmation is enabled, display email instructions
+        showMessage(
+          "Sign-up successful! Please check your email to confirm your account.",
+          "green",
+          true,
+        );
+        clearAuthForms(false);
+      }
     } catch (err) {
       showMessage("An unexpected error occurred. Please try again.");
       console.error("Sign-up error:", err);
