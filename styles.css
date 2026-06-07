@@ -411,9 +411,16 @@ a {
 
 .poster-loading {
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0)),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.25),
+      rgba(255, 255, 255, 0)
+    ),
     linear-gradient(135deg, var(--brand), var(--accent));
-  background-size: 200% 100%, 100% 100%;
+  background-size:
+    200% 100%,
+    100% 100%;
   animation: shimmer 1.4s infinite;
 }
 
@@ -456,11 +463,15 @@ a {
 
 @keyframes shimmer {
   from {
-    background-position: 200% 0, 0 0;
+    background-position:
+      200% 0,
+      0 0;
   }
 
   to {
-    background-position: -200% 0, 0 0;
+    background-position:
+      -200% 0,
+      0 0;
   }
 }
 
@@ -525,7 +536,7 @@ a {
   padding: 20px;
   background: white;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 #authContainer input {
@@ -583,13 +594,6 @@ a {
   background: #0f172a;
   color: white;
 }
-
-
-
- 
-
-
-
 
 /* ========================= */
 /* 🔐 AUTH (CLEAN ORIGINAL STYLE) */
@@ -717,7 +721,9 @@ body {
   border-radius: 0.75rem;
   padding: 2.5rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .auth-card:hover {
@@ -736,7 +742,7 @@ body {
   margin-bottom: 1.2rem;
 }
 
-.form-group label {
+.form-group > label:not(.toggle-label) {
   display: block;
   color: var(--text);
   margin-bottom: 0.5rem;
@@ -753,7 +759,9 @@ body {
   color: var(--text);
   font-family: inherit;
   font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .password-wrapper {
@@ -786,6 +794,18 @@ body {
   user-select: none;
 }
 
+/* Force normal checkbox sizing inside auth forms to override inherited rules */
+.auth-card label.toggle-label > input[type="checkbox"],
+#authContainer label.toggle-label > input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  -webkit-appearance: checkbox !important;
+  appearance: checkbox !important;
+}
+
 .auth-card input:focus {
   outline: none;
   border-color: var(--brand);
@@ -815,7 +835,9 @@ body {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s, opacity 0.2s;
+  transition:
+    background 0.3s,
+    opacity 0.2s;
 }
 
 .btn-signin:hover:not(:disabled),
@@ -873,7 +895,9 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition:
+    background 0.3s,
+    transform 0.2s;
 }
 
 .btn-logout:hover:not(:disabled) {
@@ -917,5 +941,3 @@ body {
     width: 100%;
   }
 }
-
-
