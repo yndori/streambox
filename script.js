@@ -32,7 +32,7 @@ let currentGenreId = "";
 async function initializeMovies() {
   if (!hasApiKey()) {
     showEmptyMessage(
-      "Configure your TMDB API key in config.js to load popular movies."
+      "Configure your TMDB API key in config.js to load popular movies.",
     );
     return;
   }
@@ -53,7 +53,7 @@ async function loadGenres() {
 async function loadMovies() {
   if (!hasApiKey()) {
     showEmptyMessage(
-      "Configure your TMDB API key in config.js to load movies."
+      "Configure your TMDB API key in config.js to load movies.",
     );
     return;
   }
@@ -235,25 +235,28 @@ function handleGenreChange() {
   loadMovies();
 }
 
-function goToPreviousPage() {
+async function goToPreviousPage() {
   if (currentPage <= 1) return;
 
   currentPage -= 1;
-  loadMovies();
+  await loadMovies();
+  document.getElementById("movies").scrollIntoView({ behavior: "smooth" });
 }
 
-function goToNextPage() {
+async function goToNextPage() {
   if (currentPage >= totalPages) return;
 
   currentPage += 1;
-  loadMovies();
+  await loadMovies();
+  document.getElementById("movies").scrollIntoView({ behavior: "smooth" });
 }
 
-function goToPage(page) {
+async function goToPage(page) {
   if (page === currentPage || page < 1 || page > totalPages) return;
 
   currentPage = page;
-  loadMovies();
+  await loadMovies();
+  document.getElementById("movies").scrollIntoView({ behavior: "smooth" });
 }
 
 function updatePagination() {

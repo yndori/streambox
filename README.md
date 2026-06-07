@@ -6,13 +6,16 @@ A simple responsive movie browsing web app built with HTML, CSS, and JavaScript.
 
 - `index.html` — page structure
 - `styles.css` — visual identity and responsive layout
-- `script.js` — movie array, search filter, card rendering, and modal behavior
+- `script.js` — movie pagination, search, card rendering, and modal behavior
+- `auth.js` — Supabase authentication, session handling, and Profile dropdown logic
+- `tmdb.js` — TMDB API wrapper and serverless proxy router
+- `netlify/functions/tmdb.js` — Netlify serverless function to proxy TMDB requests securely
 
 ## How to run
 
 # StreamBox Final Project
 
-A responsive movie browsing web application upgraded with **TMDB API integration** and **Supabase Authentication** as part of the Final Exam Project for the **Introduction to Web Development** course at **DUNIS Dakar**.
+A responsive movie browsing web application upgraded with **TMDB API integration**, **Supabase Authentication**, and **Netlify Serverless Functions** as part of the Final Exam Project for the **Introduction to Web Development** course at **DUNIS Dakar**.
 
 ---
 
@@ -39,6 +42,9 @@ A responsive movie browsing web application upgraded with **TMDB API integration
 - Logged-In User Email Display
 - Password Confirmation Validation
 - Error and Success Messages
+- Profile Dropdown menu in header
+- Auto-login transition on signup
+- Unique sign-in and sign-up card messaging
 
 ## Movie Browsing (TMDB API)
 
@@ -56,6 +62,7 @@ A responsive movie browsing web application upgraded with **TMDB API integration
 - Load More Button
 - Enhanced Movie Detail Page
 - Public Deployment
+- Secure serverless proxy (Netlify Functions)
 
 ## User Experience
 
@@ -64,6 +71,9 @@ A responsive movie browsing web application upgraded with **TMDB API integration
 - Error States
 - Empty States
 - Mobile-Friendly Interface
+- Mobile-friendly Profile menu stacking
+- Responsive auth layout for mobile
+- Smooth pagination scrolling offset
 
 ---
 
@@ -177,6 +187,12 @@ Verify that movie data loads correctly before presenting the project.
 
 ---
 
+# Deployment Configuration (Netlify)
+
+This project is configured to run on Netlify with the environment variable `TMDB_API_KEY` set in your Netlify dashboard to keep the key private in production. The `netlify.toml` file will automatically compile `config.js` with client-side Supabase settings on deployment.
+
+---
+
 # Screenshots
 
 ## Authentication Page
@@ -214,7 +230,6 @@ Verify that movie data loads correctly before presenting the project.
 - TMDB API requests require an active internet connection.
 - API rate limits are controlled by TMDB.
 - Authentication depends on Supabase service availability.
-- Frontend-only applications cannot fully hide public API keys.
 - Some movie information may be unavailable if not provided by TMDB.
 
 ---
