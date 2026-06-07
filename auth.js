@@ -15,11 +15,13 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
 let authContainer, appContent, userBar, userEmail, message;
 let signupEmail, signupPassword, confirmPassword, signinEmail, signinPassword;
 let signupBtn, signinBtn, logoutBtn;
+let showSigninBtn, showSignupBtn;
+let profileBtn, profileDropdown;
 
 // =============================
 // 💾 EMAIL STORAGE (localStorage)
 // =============================
-const STORED_EMAILS_KEY = 'streambox_emails';
+const STORED_EMAILS_KEY = "streambox_emails";
 
 function getSavedEmails() {
   const saved = localStorage.getItem(STORED_EMAILS_KEY);
@@ -37,14 +39,14 @@ function saveEmail(email) {
 }
 
 function updateEmailSuggestions() {
-  const datalist = document.getElementById('emailSuggestions');
+  const datalist = document.getElementById("emailSuggestions");
   if (!datalist) return;
-  
+
   const emails = getSavedEmails();
-  datalist.innerHTML = '';
-  
-  emails.forEach(email => {
-    const option = document.createElement('option');
+  datalist.innerHTML = "";
+
+  emails.forEach((email) => {
+    const option = document.createElement("option");
     option.value = email;
     datalist.appendChild(option);
   });
@@ -68,6 +70,12 @@ function initializeElements() {
   signupBtn = document.getElementById("signupBtn");
   signinBtn = document.getElementById("signinBtn");
   logoutBtn = document.getElementById("logoutBtn");
+  showSigninBtn = document.getElementById("showSignin");
+  showSignupBtn = document.getElementById("showSignup");
+
+  // Profile Dropdown Elements
+  profileBtn = document.getElementById("profileBtn");
+  profileDropdown = document.getElementById("profileDropdown");
 }
 
 // =============================
@@ -84,13 +92,22 @@ function validatePassword(password) {
     return { valid: false, message: "Password must be at least 8 characters" };
   }
   if (!/[A-Z]/.test(password)) {
-    return { valid: false, message: "Password must contain at least one uppercase letter" };
+    return {
+      valid: false,
+      message: "Password must contain at least one uppercase letter",
+    };
   }
   if (!/[a-z]/.test(password)) {
-    return { valid: false, message: "Password must contain at least one lowercase letter" };
+    return {
+      valid: false,
+      message: "Password must contain at least one lowercase letter",
+    };
   }
   if (!/[0-9]/.test(password)) {
-    return { valid: false, message: "Password must contain at least one number" };
+    return {
+      valid: false,
+      message: "Password must contain at least one number",
+    };
   }
   return { valid: true, message: "" };
 }
@@ -133,6 +150,8 @@ function setAuthUI(user) {
     return;
   }
 
+  document.body.classList.toggle("unauthenticated", !user);
+
   if (user) {
     authContainer.style.display = "none";
     appContent.style.display = "block";
@@ -142,6 +161,14 @@ function setAuthUI(user) {
     authContainer.style.display = "block";
     appContent.style.display = "none";
     userBar.style.display = "none";
+
+    // Close Profile dropdown on logout
+    if (profileDropdown && profileBtn) {
+      profileDropdown.style.display = "none";
+      profileBtn.classList.remove("active");
+      profileBtn.setAttribute("aria-expanded", "false");
+    }
+
     clearAuthForms();
   }
 }
@@ -202,10 +229,10 @@ function setupSignUpListener() {
       }
 
       showMessage(
-  "Sign-up successful! Please check your email to confirm your account.",
-  "green",
-  true
-);
+        "Sign-up successful! Please check your email to confirm your account.",
+        "green",
+        true,
+      );
       saveEmail(email.trim());
       // Keep the message visible so user can read the verification instruction
       clearAuthForms(false);
@@ -280,6 +307,37 @@ function setupLogoutListener() {
 }
 
 // =============================
+// 👤 PROFILE DROPDOWN
+// =============================
+function setupProfileDropdownListener() {
+  if (!profileBtn || !profileDropdown) return;
+
+  profileBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isVisible = profileDropdown.style.display === "flex";
+
+    if (isVisible) {
+      profileDropdown.style.display = "none";
+      profileBtn.classList.remove("active");
+      profileBtn.setAttribute("aria-expanded", "false");
+    } else {
+      profileDropdown.style.display = "flex";
+      profileBtn.classList.add("active");
+      profileBtn.setAttribute("aria-expanded", "true");
+    }
+  });
+
+  // Close dropdown on click outside
+  document.addEventListener("click", (e) => {
+    if (profileDropdown.style.display === "flex" && !profileDropdown.contains(e.target) && e.target !== profileBtn) {
+      profileDropdown.style.display = "none";
+      profileBtn.classList.remove("active");
+      profileBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
+// =============================
 // 🔄 SESSION CHECK
 // =============================
 async function initSession() {
@@ -298,6 +356,65 @@ async function initSession() {
 function setupAuthStateListener() {
   client.auth.onAuthStateChange((event, session) => {
     setAuthUI(session?.user || null);
+  });
+}
+
+function toggleAuthForm(target) {
+  const signinCard = document.getElementById("signinCard");
+  const signupCard = document.getElementById("signupCard");
+  const isSignin = target === "signin";
+
+  if (!signinCard || !signupCard || !showSigninBtn || !showSignupBtn) return;
+
+  signinCard.classList.toggle("active", isSignin);
+  signupCard.classList.toggle("active", !isSignin);
+  showSigninBtn.classList.toggle("active", isSignin);
+  showSignupBtn.classList.toggle("active", !isSignin);
+  showSigninBtn.setAttribute("aria-selected", isSignin.toString());
+  showSignupBtn.setAttribute("aria-selected", (!isSignin).toString());
+}
+
+function updateAuthSideText(mode) {
+  const signinText = document.querySelector(".auth-side-signin");
+  const signupText = document.querySelector(".auth-side-signup");
+
+  if (signinText && signupText) {
+    if (mode === "signin") {
+      signinText.style.display = "block";
+      signupText.style.display = "none";
+    } else {
+      signinText.style.display = "none";
+      signupText.style.display = "block";
+    }
+  }
+}
+
+function setupAuthSwitcher() {
+  if (!showSigninBtn || !showSignupBtn) return;
+
+  showSigninBtn.addEventListener("click", () => {
+    toggleAuthForm("signin");
+    updateAuthSideText("signin");
+  });
+  showSignupBtn.addEventListener("click", () => {
+    toggleAuthForm("signup");
+    updateAuthSideText("signup");
+  });
+}
+
+// Refresh the aside phrase when clicking the logo
+function setupLogoRefresh() {
+  const logo = document.getElementById("logoLink");
+  const asideSubtitle = document.querySelector(".auth-side p");
+  if (!logo || !asideSubtitle) return;
+
+  logo.addEventListener("click", (e) => {
+    e.preventDefault();
+    // Simple refresh: toggle a small animation and reset the text
+    asideSubtitle.style.opacity = 0.2;
+    setTimeout(() => {
+      asideSubtitle.style.opacity = 1;
+    }, 260);
   });
 }
 
@@ -326,21 +443,23 @@ function setupKeyboardShortcuts() {
 // 👁️ PASSWORD VISIBILITY TOGGLE
 // =============================
 function setupPasswordToggle() {
-  document.querySelectorAll('.password-visibility-toggle').forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-      const targetId = this.getAttribute('data-target');
-      const passwordInput = document.getElementById(targetId);
-      const toggleText = document.getElementById(targetId + 'ToggleText');
-      
-      if (this.checked) {
-        passwordInput.type = 'text';
-        toggleText.textContent = 'Hide password';
-      } else {
-        passwordInput.type = 'password';
-        toggleText.textContent = 'Show password';
-      }
+  document
+    .querySelectorAll(".password-visibility-toggle")
+    .forEach((checkbox) => {
+      checkbox.addEventListener("change", function () {
+        const targetId = this.getAttribute("data-target");
+        const passwordInput = document.getElementById(targetId);
+        const toggleText = document.getElementById(targetId + "ToggleText");
+
+        if (this.checked) {
+          passwordInput.type = "text";
+          toggleText.textContent = "Hide password";
+        } else {
+          passwordInput.type = "password";
+          toggleText.textContent = "Show password";
+        }
+      });
     });
-  });
 }
 
 // =============================
@@ -349,19 +468,21 @@ function setupPasswordToggle() {
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize all DOM elements
   initializeElements();
-  
+
   // Load saved emails into datalist
   updateEmailSuggestions();
-  
+
   // Setup all listeners
   setupSignUpListener();
   setupSignInListener();
   setupLogoutListener();
+  setupProfileDropdownListener();
   setupKeyboardShortcuts();
   setupPasswordToggle();
+  setupAuthSwitcher();
+  setupLogoRefresh();
   setupAuthStateListener();
-  
+
   // Check existing session
   initSession();
 });
-

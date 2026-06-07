@@ -20,163 +20,235 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <ul class="background" id="pageBackground">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
     <header class="site-header">
-      <a href="#" class="logo">StreamBox</a>
+      <a href="index.html" id="logoLink" class="logo">StreamBox</a>
 
       <button class="menu-btn" id="menuBtn" aria-label="Open navigation">
         &equiv;
       </button>
 
       <nav class="nav-links" id="navLinks">
-        <a href="#hero">Home</a>
-        <a href="#movies">Movies</a>
-        <a href="#about">About</a>
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#movies" class="nav-link">Movies</a>
+        <a href="#about" class="nav-link">About</a>
+
+        <div id="userBar" class="profile-container" style="display: none">
+          <button
+            id="profileBtn"
+            class="profile-btn"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="Toggle profile menu"
+          >
+            Profile <span class="chevron">&#9662;</span>
+          </button>
+          <div
+            id="profileDropdown"
+            class="profile-dropdown"
+            style="display: none"
+          >
+            <div class="profile-dropdown-info">
+              <span class="user-label">Logged in as:</span>
+              <span
+                id="userEmail"
+                class="user-email"
+                aria-label="Current user email"
+              ></span>
+            </div>
+            <button id="logoutBtn" class="btn-logout" aria-label="Sign out">
+              Sign Out
+            </button>
+          </div>
+        </div>
       </nav>
     </header>
     <!-- AUTHENTICATION UI-->
     <section id="authContainer" class="auth-wrapper">
       <h2>StreamBox</h2>
 
-      <!-- MESSAGE DISPLAY -->
-      <div
-        id="message"
-        class="auth-message"
-        role="alert"
-        aria-live="polite"
-      ></div>
-
-      <div class="auth-cards-container">
-        <!-- SIGN IN CARD -->
-        <div class="auth-card">
-          <h3>Sign In</h3>
-
-          <form id="signinForm" onsubmit="return false;">
-            <div class="form-group">
-              <label for="signinEmail">Email Address</label>
-              <input
-                type="email"
-                id="signinEmail"
-                placeholder="your@email.com"
-                list="emailSuggestions"
-                autocomplete="email"
-                required
-                aria-label="Sign in email address"
-              />
-              <datalist id="emailSuggestions"></datalist>
-            </div>
-
-            <div class="form-group">
-              <label for="signinPassword">Password</label>
-              <input
-                type="password"
-                id="signinPassword"
-                placeholder="Enter your password"
-                autocomplete="current-password"
-                required
-                aria-label="Sign in password"
-              />
-              <label class="toggle-label">
-                <span id="signinPasswordToggleText">Show password</span>
-                <input
-                  type="checkbox"
-                  class="password-visibility-toggle"
-                  data-target="signinPassword"
-                />
-              </label>
-            </div>
-
-            <button type="button" id="signinBtn" class="btn-signin">
-              Sign In
-            </button>
-          </form>
+      <div class="auth-panel">
+        <div class="auth-side">
+          <div class="auth-side-body">
+            <div class="auth-side-icon"></div>
+            <h3>StreamBox</h3>
+            <p class="auth-side-signin" style="display: block">
+              Sign in to browse unlimited entertainment. Your gateway to
+              thousands of movies and shows awaits.
+            </p>
+            <p class="auth-side-signup" style="display: none">
+              Join and discover a world of entertainment like never before. Sign
+              up now and start searching your favorite movies and shows.
+            </p>
+          </div>
         </div>
 
-        <!-- SIGN UP CARD -->
-        <div class="auth-card">
-          <h3>Create Account</h3>
-
-          <form id="signupForm" onsubmit="return false;">
-            <div class="form-group">
-              <label for="signupEmail">Email Address</label>
-              <input
-                type="email"
-                id="signupEmail"
-                autocomplete="email"
-                list="emailSuggestions"
-                placeholder="your@email.com"
-                required
-                aria-label="Sign up email address"
-              />
+        <div class="auth-main">
+          <div class="auth-cards-container">
+            <div
+              class="auth-toggle"
+              role="tablist"
+              aria-label="Switch authentication form"
+            >
+              <div
+                id="showSignin"
+                class="auth-tab active"
+                aria-selected="true"
+                role="tab"
+              >
+                Sign In
+              </div>
+              <div
+                id="showSignup"
+                class="auth-tab"
+                aria-selected="false"
+                role="tab"
+              >
+                Create Account
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="signupPassword">Password</label>
-              <input
-                type="password"
-                id="signupPassword"
-                autocomplete="new-password"
-                placeholder="Min. 8 characters"
-                required
-                aria-label="Sign up password"
-              />
-              <small class="password-hint">Minimum 8 characters</small>
-              <label class="toggle-label">
-                <span id="signupPasswordToggleText">Show password</span>
-                <input
-                  type="checkbox"
-                  class="password-visibility-toggle"
-                  data-target="signupPassword"
-                />
-              </label>
+            <!-- SIGN IN CARD -->
+            <div class="auth-card active" id="signinCard">
+              <h3>Sign In</h3>
+              <p class="auth-subtitle">
+                Enter your credentials to access your account
+              </p>
+
+              <form id="signinForm" onsubmit="return false;">
+                <div class="form-group">
+                  <label for="signinEmail">Email Address</label>
+                  <input
+                    type="email"
+                    id="signinEmail"
+                    placeholder="youremail@example.com"
+                    list="emailSuggestions"
+                    autocomplete="email"
+                    required
+                    aria-label="Sign in email address"
+                  />
+                  <datalist id="emailSuggestions"></datalist>
+                </div>
+
+                <div class="form-group">
+                  <label for="signinPassword">Password</label>
+                  <input
+                    type="password"
+                    id="signinPassword"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                    aria-label="Sign in password"
+                  />
+                </div>
+
+                <div class="form-row">
+                  <label class="toggle-label">
+                    <span id="signinPasswordToggleText">Show password</span>
+                    <input
+                      type="checkbox"
+                      class="password-visibility-toggle"
+                      data-target="signinPassword"
+                    />
+                  </label>
+                </div>
+
+                <!-- MESSAGE DISPLAY -->
+                <div
+                  id="message"
+                  class="auth-message"
+                  role="alert"
+                  aria-live="polite"
+                ></div>
+                <button type="button" id="signinBtn" class="btn-signin">
+                  Sign In
+                </button>
+              </form>
             </div>
 
-            <div class="form-group">
-              <label for="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                autocomplete="new-password"
-                placeholder="Confirm your password"
-                required
-                aria-label="Confirm password"
-              />
-              <label class="toggle-label">
-                <span id="confirmPasswordToggleText">Show password</span>
-                <input
-                  type="checkbox"
-                  class="password-visibility-toggle"
-                  data-target="confirmPassword"
-                />
-              </label>
-            </div>
+            <!-- SIGN UP CARD -->
+            <div class="auth-card" id="signupCard">
+              <h3>Create Account</h3>
 
-            <button type="button" id="signupBtn" class="btn-signup">
-              Create Account
-            </button>
-          </form>
+              <form id="signupForm" onsubmit="return false;">
+                <div class="form-group">
+                  <label for="signupEmail">Email Address</label>
+                  <input
+                    type="email"
+                    id="signupEmail"
+                    autocomplete="email"
+                    list="emailSuggestions"
+                    placeholder="your@email.com"
+                    required
+                    aria-label="Sign up email address"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="signupPassword">Password</label>
+                  <input
+                    type="password"
+                    id="signupPassword"
+                    autocomplete="new-password"
+                    placeholder="Min. 8 characters"
+                    required
+                    aria-label="Sign up password"
+                  />
+                  <label class="toggle-label">
+                    <span id="signupPasswordToggleText">Show password</span>
+                    <input
+                      type="checkbox"
+                      class="password-visibility-toggle"
+                      data-target="signupPassword"
+                    />
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    autocomplete="new-password"
+                    placeholder="Confirm your password"
+                    required
+                    aria-label="Confirm password"
+                  />
+                  <label class="toggle-label">
+                    <span id="confirmPasswordToggleText">Show password</span>
+                    <input
+                      type="checkbox"
+                      class="password-visibility-toggle"
+                      data-target="confirmPassword"
+                    />
+                  </label>
+                </div>
+
+                <button type="button" id="signupBtn" class="btn-signup">
+                  Create Account
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- USER INFO BAR -->
-    <section id="userBar" class="user-bar" style="display: none">
-      <div class="user-info">
-        <span class="user-label">Logged in as:</span>
-        <span
-          id="userEmail"
-          class="user-email"
-          aria-label="Current user email"
-        ></span>
-      </div>
-
-      <button id="logoutBtn" class="btn-logout" aria-label="Sign out">
-        Sign Out
-      </button>
-    </section>
     <main id="appContent" style="display: none">
       <section id="hero" class="hero">
         <div class="hero-content">
-          <p class="eyebrow">Watch anywhere</p>
+          <p class="eyebrow">Search Everything</p>
           <h1>Stream what you love</h1>
           <p>
             Browse drama, comedy, thriller, sci-fi and more. Discover your next
@@ -229,10 +301,6 @@
         </p>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <p>&copy; 2026 StreamBox</p>
-    </footer>
 
     <dialog class="movie-modal" id="movieModal">
       <button class="close-btn" id="closeModal" aria-label="Close modal">
