@@ -182,6 +182,7 @@ Verify that movie data loads correctly before presenting the project.
 ## Authentication Page
 
 [Insert future Screenshot]
+<img width="1440" height="900" alt="Authentification page 1" src="https://github.com/user-attachments/assets/5d0e4b50-df00-48a9-9bc6-b47eaf9ca2e9" />
 
 ## Sign-Up Form
 
