@@ -191,33 +191,30 @@ Verify that movie data loads correctly before presenting the project.
 
 # Screenshots
 
-## Authentication Page
+<img width="1440" height="900" alt="authenfication page" src="https://github.com/user-attachments/assets/b08ccf9e-6749-4435-be0e-b6d254e2fde1" />
 
-[Insert future Screenshot]
 
 ## Sign-Up Form
 
 [Insert future Screenshot]
 
-## Movie Listing Page
+<img width="1440" height="900" alt="Movie Listing Page" src="https://github.com/user-attachments/assets/d50d7a68-ecf1-4ef3-800d-bf1afdecbf04" />
 
-[Insert future Screenshot]
 
-## Search Results
 
-[Insert future Screenshot]
+<img width="1440" height="900" alt="Search Results" src="https://github.com/user-attachments/assets/2743371a-5a4a-416a-bd5b-e8418f5e9ef2" />
 
-## Movie Detail Modal/Page
 
-[Insert future Screenshot]
+<img width="2360" height="1640" alt="Movie detail modal page" src="https://github.com/user-attachments/assets/3120f4c4-2ef9-4da4-948c-874b4d77ba94" />
 
-## Genre Filtering
 
-[Insert future Screenshot]
+<img width="1440" height="900" alt="Genre filtering" src="https://github.com/user-attachments/assets/c45f9bf5-15c9-44b5-bdac-b8f8c732b2e4" />
 
-## Mobile Responsive Layout
 
-[Insert future Screenshot]
+
+<img width="1440" height="900" alt="Responsive Layout 1" src="https://github.com/user-attachments/assets/470f54da-cbfb-40e1-a623-4ae08deb40b1" />
+<img width="2360" height="1640" alt="Responsive Layout 2" src="https://github.com/user-attachments/assets/79ef8e79-09e9-483e-a5df-1f09e2707b06" />
+<img width="603" height="1311" alt="Responsive Layout 3" src="https://github.com/user-attachments/assets/1fe4f0ca-d072-4644-8c7f-7755d94a7024" />
 
 ---
 
