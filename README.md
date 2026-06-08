@@ -191,27 +191,32 @@ Verify that movie data loads correctly before presenting the project.
 
 # Screenshots
 
+## Authentification Page
 <img width="1440" height="900" alt="authenfication page" src="https://github.com/user-attachments/assets/b08ccf9e-6749-4435-be0e-b6d254e2fde1" />
 
 
 ## Sign-Up Form
 
-[Insert future Screenshot]
+<img width="1440" height="900" alt="Sign up form" src="https://github.com/user-attachments/assets/b29df561-30d0-4f60-9cde-94a3520641a5" />
 
-<img width="1440" height="900" alt="Movie Listing Page" src="https://github.com/user-attachments/assets/d50d7a68-ecf1-4ef3-800d-bf1afdecbf04" />
-
-
-
-<img width="1440" height="900" alt="Search Results" src="https://github.com/user-attachments/assets/2743371a-5a4a-416a-bd5b-e8418f5e9ef2" />
+## Movie Listing Page
+<img width="1440" height="900" alt="Screenshot 2026-06-08 at 10 21 13 PM" src="https://github.com/user-attachments/assets/8806e03a-f5fd-497c-b748-758e0e8c89d1" />
 
 
-<img width="2360" height="1640" alt="Movie detail modal page" src="https://github.com/user-attachments/assets/3120f4c4-2ef9-4da4-948c-874b4d77ba94" />
+Search Results
+<img width="1440" height="900" alt="Screenshot 2026-06-08 at 10 13 07 PM" src="https://github.com/user-attachments/assets/7ec8c490-9437-4155-89ca-6488b5cb10d3" />
 
 
-<img width="1440" height="900" alt="Genre filtering" src="https://github.com/user-attachments/assets/c45f9bf5-15c9-44b5-bdac-b8f8c732b2e4" />
+## Movie Detail Modal/Page
+<img width="2360" height="1640" alt="Movie detail modal page" src="https://github.com/user-attachments/assets/5c81fdf9-cc3a-4eaf-b5ae-6148979397ed" />
+
+
+## Genre Filtering
+<img width="1440" height="900" alt="Genre filtering" src="https://github.com/user-attachments/assets/7abe8c46-155b-4e1f-a979-4631283adbc3" />
 
 
 
+## Mobile Responsive Layout
 <img width="1440" height="900" alt="Responsive Layout 1" src="https://github.com/user-attachments/assets/470f54da-cbfb-40e1-a623-4ae08deb40b1" />
 <img width="2360" height="1640" alt="Responsive Layout 2" src="https://github.com/user-attachments/assets/79ef8e79-09e9-483e-a5df-1f09e2707b06" />
 <img width="603" height="1311" alt="Responsive Layout 3" src="https://github.com/user-attachments/assets/1fe4f0ca-d072-4644-8c7f-7755d94a7024" />
