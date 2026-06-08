@@ -187,11 +187,7 @@ Verify that movie data loads correctly before presenting the project.
 
 ---
 
-# Deployment Configuration (Netlify)
 
-This project is configured to run on Netlify with the environment variable `TMDB_API_KEY` set in your Netlify dashboard to keep the key private in production. The `netlify.toml` file will automatically compile `config.js` with client-side Supabase settings on deployment.
-
----
 
 # Screenshots
 
