@@ -198,6 +198,8 @@ This project is configured to run on Netlify with the environment variable `TMDB
 ## Authentication Page
 
 [Insert future Screenshot]
+<img width="1440" height="900" alt="authenfication page" src="https://github.com/user-attachments/assets/722065ef-3ca4-491e-8bc1-9361d34c5014" />
+
 
 ## Sign-Up Form
 
@@ -206,10 +208,12 @@ This project is configured to run on Netlify with the environment variable `TMDB
 ## Movie Listing Page
 
 [Insert future Screenshot]
+<img width="1440" height="900" alt="Search Results" src="https://github.com/user-attachments/assets/f8abd711-196f-4dca-960d-e90a9b47faf2" />
 
 ## Search Results
 
 [Insert future Screenshot]
+<img width="1440" height="900" alt="Search Results" src="https://github.com/user-attachments/assets/5b4bdeb4-59fe-47fb-babb-dc4bf3337f57" />
 
 ## Movie Detail Modal/Page
 
