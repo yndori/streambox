@@ -217,9 +217,8 @@ Search Results
 
 
 ## Mobile Responsive Layout
-<img width="1440" height="900" alt="Responsive Layout 1" src="https://github.com/user-attachments/assets/470f54da-cbfb-40e1-a623-4ae08deb40b1" />
-<img width="2360" height="1640" alt="Responsive Layout 2" src="https://github.com/user-attachments/assets/79ef8e79-09e9-483e-a5df-1f09e2707b06" />
-<img width="603" height="1311" alt="Responsive Layout 3" src="https://github.com/user-attachments/assets/1fe4f0ca-d072-4644-8c7f-7755d94a7024" />
+<img width="2360" height="1640" alt="Responsive Layout 1" src="https://github.com/user-attachments/assets/79ef8e79-09e9-483e-a5df-1f09e2707b06" />
+<img width="603" height="1311" alt="Responsive Layout 2" src="https://github.com/user-attachments/assets/1fe4f0ca-d072-4644-8c7f-7755d94a7024" />
 
 ---
 
